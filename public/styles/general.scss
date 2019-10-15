@@ -1,0 +1,114 @@
+:root {
+    --naver-green: #08a600;
+    --naver-light-green: #03cf5d;
+    --shake-animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) forwards;
+}
+
+body {
+    background: white;
+    font-size: 1rem;
+}
+
+footer {
+    text-align: center;
+}
+
+.vertical-margin {
+    margin: 0.5rem 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.inline {
+    display: inline;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: darkgray !important;
+    cursor: not-allowed;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+select {
+    word-wrap: normal;
+}
+
+button:focus,
+select:focus {
+    outline: none;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+input[type=checkbox] {
+    vertical-align: text-top;
+}
+
+input:focus {
+    outline: none;
+}
+
+.container {
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 0 auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form select {
+    width: 100%;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate(-1px, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate(2px, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate(-4px, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate(4px, 0);
+    }
+}

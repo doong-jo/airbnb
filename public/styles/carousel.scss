@@ -1,0 +1,226 @@
+.mini-carousel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2rem;
+
+    a {
+        color: initial;
+        text-decoration: none;
+    }
+
+    .scroller-container::before {
+        position: absolute;
+        content: "";
+        left: 1rem;
+        width: 14rem;
+        height: 1rem;
+        top: 3rem;
+        background: #222;
+        -webkit-box-shadow: 0 0px 36px 3px #222;
+        box-shadow: 0 0px 36px 6px #222;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(180deg);
+    }
+
+    .scroller-container {
+        position: relative;
+        padding: 0 1rem;
+        flex: 0 0 auto;
+
+        .view {
+            display: flex;
+            overflow-x: hidden;
+            width: 14rem;
+            height: 14rem;
+        }
+
+        .slide-list {
+            display: flex;
+        }
+
+        .img-link {
+            margin: auto;
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        .img {
+            width: 100%;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 0.7rem;
+            height: 1rem;
+            margin: auto 0;
+            top: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
+
+        .arrow:first-child {
+            background-image: url('/img/left-arrow-solid.svg');
+            background-repeat: no-repeat;
+            right: 100%;
+        }
+
+        .arrow:last-child {
+            background-image: url('/img/right-arrow-solid.svg');
+            background-repeat: no-repeat;
+            left: 100%;
+        }
+    }
+
+    .between-scroller-content {
+        flex: 1 1 1rem;
+        max-width: 6rem;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 29rem;
+        flex: 0 0 auto;
+        margin-left: 2rem;
+
+        .title {
+            font-size: 2.5rem;
+        }
+
+        .body {
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        .footer {
+            font-size: 1rem;
+            font-weight: 550;
+            cursor: pointer;
+        }
+
+        .footer span:hover {
+            text-decoration: underline;
+        }
+
+        .footer::after {
+            content: "▸";
+        }
+    }
+}
+
+.full-carousel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 2rem;
+
+    a {
+        color: initial;
+        text-decoration: none;
+    }
+
+    .scroller-container {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        height: 24rem;
+        flex-direction: row;
+        padding: 1rem;
+        flex: 1 70rem;
+        overflow-x: hidden;
+
+        .view {
+            display: flex;
+            flex: 0 0 55rem;
+            position: relative;
+            overflow-x: hidden;
+            height: auto;
+        }
+
+        .slide-list {
+            display: flex;
+        }
+
+        .arrow {
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+            margin: auto 3rem;
+            flex: 0 0 3rem;
+            cursor: pointer;
+        }
+
+        .arrow:first-child {
+            z-index: 1;
+            background-image: url('/img/circle-left-solid.svg');
+            background-repeat: no-repeat;
+        }
+
+        .arrow:last-child {
+            z-index: 1;
+            background-image: url('/img/circle-right-solid.svg');
+            background-repeat: no-repeat;
+        }
+
+        .img {
+            flex: 1 0 55rem;
+            display: flex;
+            justify-content: flex-end;
+            background-size: auto 400px;
+            background: linear-gradient(to right, #FFF, #FFF 15px, rgba(255, 255, 255, 0) 45px);
+            background-position: center;
+        }
+    }
+
+    .between-scroller-content {
+        background: green;
+        flex: 1 1 1rem;
+        max-width: 6rem;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        flex: 0 0 26rem;
+        margin-left: 2rem;
+
+        .title {
+            font-size: 1.8rem;
+        }
+
+        .body {
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        .footer {
+            font-size: 1rem;
+            font-weight: 550;
+            cursor: pointer;
+        }
+
+        .footer span:hover {
+            text-decoration: underline;
+        }
+
+        .footer::after {
+            content: "▸";
+        }
+
+        .badage {
+            background-color: #00A8E1;
+            display: inline-block;
+            width: fit-content;
+            padding: 0.5rem 0.7rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            text-transform: uppercase;
+        }
+    }
+}

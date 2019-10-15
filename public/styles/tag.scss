@@ -1,0 +1,42 @@
+.tag-container {
+    border: 1px solid #ccc;
+    padding: 0.8rem 0.6rem;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tag-box {
+    display: inline;
+    padding: 0.4rem 0.6rem;
+    background: #eee;
+    border-radius: 0.5rem;
+    margin: 0.2rem;
+    flex: 0 1 auto;
+}
+
+.tag-box span {
+    color: #4a4a4a;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.tag-container input {
+    font-weight: normal;
+    font-size: 1.2rem;
+    padding: 0 0 0 0.2rem;
+    margin: 0.2rem;
+    border: 0;
+    flex: 1 1 auto;
+    width: 3rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.tag-box img {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-top;
+    cursor: pointer;
+    margin-left: 0.3rem;
+}

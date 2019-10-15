@@ -1,0 +1,24 @@
+.main {
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.main .container {
+    margin-top: 10rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 20rem;
+}
+
+#logout {
+    margin-top: 10rem;
+}

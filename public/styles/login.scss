@@ -1,0 +1,127 @@
+.login {
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.form-signin {
+    max-width: 20rem;
+    height: min-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 5rem;
+    bottom: 0;
+    margin: 0 auto;
+}
+
+.form-signin .login-title {
+    font-size: 2.5rem;
+    background: linear-gradient(230deg, #a24bcf, #4b79cf, #4bc5cf);
+    background-size: 300% 300%;
+    animation: changeColor 3s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-validator {
+    display: block;
+    margin: 0rem;
+}
+
+.login header {
+    height: -webkit-fill-available !important;
+    position: relative;
+    background-color: black;
+    height: 75vh;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+
+.login header video {
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 0;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    transition: width 1s, height 1s;
+    -webkit-transition: width 1s, height 1s;
+}
+
+.adjust-size {
+    width: 2048px !important;
+    height: auto !important;
+}
+
+
+.login header .container {
+    position: relative;
+}
+
+.login header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+@-webkit-keyframes changeColor {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes changeColor {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes changeColor {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}

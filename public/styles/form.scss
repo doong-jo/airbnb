@@ -1,0 +1,118 @@
+.form-container {
+    --form-margin-small: 0.5rem;
+    --form-margin: 1rem;
+    --form-box-padding: 0.6rem;
+    --form-border: 1px solid #ccc;
+
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-container input {
+    width: 100%;
+    border: var(--form-border);
+    padding: var(--form-box-padding);
+    margin-top: var(--form-margin-small);
+    margin-bottom: var(--form-margin-small);
+    font-size: 1.2em;
+}
+
+.form-container input:focus {
+    border-color: var(--naver-green);
+}
+
+.form-container input[type=checkbox] {
+    width: auto;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.form-container select {
+    min-width: 5em;
+    font-size: 1.2rem;
+    padding: var(--form-box-padding);
+    margin-top: var(--form-margin-small);
+    margin-bottom: var(--form-margin-small);
+    border: var(--form-border);
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #fff url(/img/sel_arr.gif) 100% 50% no-repeat;
+}
+
+.form-container select:focus {
+    border-color: var(--naver-green);
+}
+
+.form-container button {
+    width: 100%;
+    padding: 1rem var(--form-box-padding);
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    box-sizing: border-box;
+    border: 0;
+}
+
+.form-container button.primary {
+    color: white;
+    background-color: var(--naver-green);
+}
+
+.form-container form label {
+    margin-top: var(--form-margin);
+    font-weight: bold;
+}
+
+.form-container {
+    margin: 0.5rem 0;
+}
+
+.form-container span.label-checkbox {
+    cursor: pointer;
+}
+
+.form-container .form-flex-items {
+    margin-right: var(--form-margin);
+    flex: 1 1 0;
+}
+
+.form-container .form-flex-items.center {
+    flex: 0 0 30rem;
+}
+
+.form-inputs-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-container .form-flex-items:last-child {
+    margin-right: 0;
+}
+
+.form-container div.term span {
+    text-decoration: underline;
+    vertical-align: middle;
+    position: relative;
+    top: 0.5rem;
+}
+
+.form-container .form-validator {
+    color: #ccc;
+    display: block;
+    font-weight: 500;
+    visibility: hidden;
+}
+
+.form-validator.warning {
+    color: #F44336;
+    visibility: visible;
+    animation: var(--shake-animation);
+    transform: translate(0, 0);
+}
+
+.form-validator.okay {
+    color: var(--naver-green);
+    visibility: visible;
+    transform: translate(0, 0);
+}

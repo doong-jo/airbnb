@@ -1,0 +1,21 @@
+[{
+    "name": "Ship",
+    "image": "https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_A._CB513333159_.png",
+    "items": 4
+}, {
+    "name": "Stream",
+    "image": "https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_B._CB513285352_.png",
+    "items": 5
+}, {
+    "name": "Shop",
+    "image": "https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_C._CB513285352_.png",
+    "items": 4
+}, {
+    "name": "Read",
+    "image": "https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_D._CB513285353_.png",
+    "items": 2
+}, {
+    "name": "More",
+    "image": "https://images-na.ssl-images-amazon.com/images/G/01/marketing/prime/detail_page/InteractivePlane_TILES_SpriteSheet_E._CB513285352_.png",
+    "items": 2
+}]
