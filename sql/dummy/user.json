@@ -1,0 +1,34 @@
+[{
+    "id": "dummyId1",
+    "salt": "10",
+    "password": "Boostcamp1!",
+    "name": "dummyName1",
+    "birth": "19940419",
+    "gender": "남",
+    "email": "dummy@gmail.com",
+    "phone": "01012345678",
+    "favorite": "hobby1,hobby2,hobby3",
+    "is_admin": false
+}, {
+    "id": "dummyId2",
+    "salt": "10",
+    "password": "Boostcamp1!",
+    "name": "dummyName2",
+    "birth": "19940419",
+    "gender": "남",
+    "email": "dummy@gmail.com",
+    "phone": "01012345678",
+    "favorite": "hobby1,hobby2,hobby3",
+    "is_admin": false
+}, {
+    "id": "dummyId3",
+    "salt": "10",
+    "password": "Boostcamp1!",
+    "name": "dummyName3",
+    "birth": "19940419",
+    "gender": "남",
+    "email": "dummy@gmail.com",
+    "phone": "01012345678",
+    "favorite": "hobby1,hobby2,hobby3",
+    "is_admin": false
+}]
