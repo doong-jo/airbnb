@@ -1,5 +1,8 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import Sequelize from "sequelize";
+import dotenv from "dotenv";
+dotenv.config();
 
 function getImportedAllModels(sequelize) {
     const basename = path.basename(__filename);
@@ -17,14 +20,12 @@ function getImportedAllModels(sequelize) {
             db[modelName].associate(db);
         }
     });
-    db['sequelize'] = sequelize;
+    db["sequelize"] = sequelize;
 
     return db;
 }
 
 function getSequelizeInstance() {
-    require("dotenv").config();
-    const Sequelize = require("sequelize");
     const dbName = (() => {
         const { NODE_ENV } = process.env;
         if (NODE_ENV === process.env.ENV_DEV) {

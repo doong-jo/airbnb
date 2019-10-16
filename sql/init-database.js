@@ -1,5 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
+
 const modelNameList = getModelNames();
 
 function getModelNames() {
@@ -33,7 +35,6 @@ async function createDummyData(modelName, model, ext) {
             return require(`./dummy/${modelName}.${ext}`);
         },
         csv: () => {
-            const csv = require("csv-parser");
             const csvData = [];
             return new Promise((res, rej) => {
                 const csvFile = path.join(
