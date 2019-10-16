@@ -59,5 +59,6 @@ module.exports = (sequelize, DataTypes) => {
         // });
     };
 
+    user.insertDataType = "json";
     return user;
 };

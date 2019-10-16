@@ -29,17 +29,17 @@ async function clearTable(model) {
     });
 }
 
-async function createDummyData(modelName, model, ext) {
+async function createDummyData(modelName, model) {
     const processByExt = {
         json: () => {
-            return require(`./dummy/${modelName}.${ext}`);
+            return require(`./dummy/${modelName}.json`);
         },
         csv: () => {
             const csvData = [];
             return new Promise((res, rej) => {
                 const csvFile = path.join(
                     __dirname,
-                    `./dummy/${modelName}.${ext}`
+                    `./dummy/${modelName}.csv`
                 );
                 fs.createReadStream(csvFile)
                     .pipe(csv())
@@ -53,7 +53,7 @@ async function createDummyData(modelName, model, ext) {
         }
     };
 
-    const dummyData = await processByExt[ext]();
+    const dummyData = await processByExt[model.insertDataType]();
     const createResult = await model.bulkCreate(dummyData, { logging: false });
     return {
         recordLength: dummyData.length,

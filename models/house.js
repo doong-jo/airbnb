@@ -70,5 +70,6 @@ module.exports = (sequelize, DataTypes) => {
         // });
     };
 
+    house.insertDataType = "csv";
     return house;
 };
