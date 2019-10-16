@@ -53,22 +53,8 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true
         }
     );
-    // 관계 설정
-    house.associate = function(models) {
-        // associations
-        // foreignKey: 상대방 column 이름
-        // sourceKey: 내 column 이름
-        // house.hasMany(models.Project, {
-        //     foreignKey: "house_id",
-        //     sourceKey: "id",
-        //     onDelete: "cascade",
-        //     onUpdate: "cascade"
-        // });
-        // house.hasMany(models.Task, {
-        //     foreignKey: "house_id",
-        //     sourceKey: "id"
-        // });
-    };
+
+    house.associate = function(models) {};
 
     house.insertDataType = "csv";
     return house;

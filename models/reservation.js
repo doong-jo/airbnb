@@ -1,4 +1,5 @@
 import { disallowNull } from "../utils/sequel";
+import { user, house } from "../models/db";
 
 module.exports = (sequelize, DataTypes) => {
     const reservation = sequelize.define(
@@ -10,9 +11,6 @@ module.exports = (sequelize, DataTypes) => {
             check_out: {
                 type: DataTypes.DATE
             },
-            user_id: {
-                type: DataTypes.STRING
-            },
             adault: {
                 type: DataTypes.INTEGER
             },
@@ -20,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER
             },
             baby: {
+                type: DataTypes.INTEGER
+            },
+            user_id: {
+                type: DataTypes.INTEGER
+            },
+            house_id: {
                 type: DataTypes.INTEGER
             }
         }),
@@ -32,19 +36,18 @@ module.exports = (sequelize, DataTypes) => {
     );
     // 관계 설정
     reservation.associate = function(models) {
-        // associations
-        // foreignKey: 상대방 column 이름
-        // sourceKey: 내 column 이름
-        // reservation.hasMany(models.Project, {
-        //     foreignKey: "reservation_id",
-        //     sourceKey: "id",
-        //     onDelete: "cascade",
-        //     onUpdate: "cascade"
-        // });
-        // reservation.hasMany(models.Task, {
-        //     foreignKey: "reservation_id",
-        //     sourceKey: "id"
-        // });
+        reservation.belongsTo(models.user, {
+            foreignKey: "id",
+            sourceKey: "user_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
+        });
+        reservation.belongsTo(models.house, {
+            foreignKey: "id",
+            sourceKey: "house_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
+        });
     };
 
     reservation.insertDataType = "json";

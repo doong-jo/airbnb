@@ -43,21 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     // 관계 설정
-    user.associate = function(models) {
-        // associations
-        // foreignKey: 상대방 column 이름
-        // sourceKey: 내 column 이름
-        // User.hasMany(models.Project, {
-        //     foreignKey: "user_id",
-        //     sourceKey: "id",
-        //     onDelete: "cascade",
-        //     onUpdate: "cascade"
-        // });
-        // User.hasMany(models.Task, {
-        //     foreignKey: "user_id",
-        //     sourceKey: "id"
-        // });
-    };
+    user.associate = function(models) {};
 
     user.insertDataType = "json";
     return user;
