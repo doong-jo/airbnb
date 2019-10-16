@@ -14,18 +14,16 @@ async function clearTable(model) {
     });
 }
 
-async function createDummyData(modelName, model) {
+async function createDummyData(model) {
+    const { name } = model;
     const processByExt = {
         json: () => {
-            return require(`./dummy/${modelName}.json`);
+            return require(`./dummy/${name}.json`);
         },
         csv: () => {
             const csvData = [];
             return new Promise((res, rej) => {
-                const csvFile = path.join(
-                    __dirname,
-                    `./dummy/${modelName}.csv`
-                );
+                const csvFile = path.join(__dirname, `./dummy/${name}.csv`);
                 fs.createReadStream(csvFile)
                     .pipe(csv())
                     .on("data", function(data) {
