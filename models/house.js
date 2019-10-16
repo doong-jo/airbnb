@@ -1,14 +1,14 @@
+import { disallowNull } from "../utils/sequel";
+
 module.exports = (sequelize, DataTypes) => {
     const house = sequelize.define(
         "house",
-        {
+        disallowNull({
             name: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             images: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             type: {
                 type: DataTypes.ENUM([
@@ -20,40 +20,32 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             },
             desc: {
-                type: DataTypes.TEXT,
-                allowNull: false
+                type: DataTypes.TEXT
             },
             price: {
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.INTEGER
             },
             capacity: {
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.INTEGER
             },
             bedroom: {
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.INTEGER
             },
             bathroom: {
-                type: DataTypes.FLOAT,
-                allowNull: false
+                type: DataTypes.FLOAT
             },
             bed: {
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.INTEGER
             },
             review_count: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
                 defaultValue: 0
             },
             rating: {
                 type: DataTypes.STRING,
-                allowNull: false,
                 defaultValue: "0"
             }
-        },
+        }),
         {
             tableName: "house",
             timestamps: true,

@@ -1,48 +1,40 @@
+import { disallowNull } from "../utils/sequel";
+
 module.exports = (sequelize, DataTypes) => {
     const user = sequelize.define(
         "user",
-        {
+        disallowNull({
             login_id: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             salt: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             password: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             name: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             birth: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             gender: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             email: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             phone: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             favorite: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             is_admin: {
-                type: DataTypes.TINYINT,
-                allowNull: false
+                type: DataTypes.TINYINT
             }
-        },
+        }),
         {
             tableName: "user",
             timestamps: true,
