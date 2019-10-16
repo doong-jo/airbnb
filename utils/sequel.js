@@ -1,11 +1,9 @@
 export function disallowNull(attributes) {
     for (let attributeName in attributes) {
         const { allowNull } = attributes[attributeName];
-        if (allowNull) {
-            continue;
+        if (allowNull === undefined) {
+            attributes[attributeName].allowNull = false;
         }
-
-        attributes[attributeName].allowNull = false;
     }
 
     return attributes;
