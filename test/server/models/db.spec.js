@@ -1,6 +1,6 @@
-describe("Model - DB", () => {
-    const db = require("../../../models/db");
+import db from "../../../models/db";
 
+describe("Model - DB", () => {
     afterAll(async done => {
         db.sequelize.close();
         done();

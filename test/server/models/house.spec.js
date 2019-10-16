@@ -1,6 +1,7 @@
+import db from "../../../models/db";
+import Sequelize from "sequelize";
+
 describe("Model - House", () => {
-    const db = require("../../../models/db");
-    const Sequelize = require("sequelize");
     const { gte, lte } = Sequelize.Op;
     const { house } = db;
 

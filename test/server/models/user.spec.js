@@ -1,5 +1,6 @@
+import db from "../../../models/db";
+
 describe("Model - User", () => {
-    const db = require("../../../models/db");
     const { user } = db;
 
     afterAll(async done => {
