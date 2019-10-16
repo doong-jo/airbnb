@@ -53,11 +53,7 @@ describe("Sequelize - init-database", () => {
             // given
 
             // when
-            const { recordLength, createResult } = await createDummyData(
-                "user",
-                user,
-                "json"
-            );
+            const { recordLength, createResult } = await createDummyData(user);
 
             // then
             expect(recordLength).toEqual(createResult.length);
@@ -89,14 +85,44 @@ describe("Sequelize - init-database", () => {
             // given
 
             // when
+            const { recordLength, createResult } = await createDummyData(house);
+
+            // then
+            expect(recordLength).toEqual(createResult.length);
+        });
+    });
+
+    describe("Reservation", () => {
+        test("(IF NOT EXITS)Reservation 테이블 생성", async () => {
+            // given
+
+            // when
+            const syncResult = await createTable(reservation);
+
+            // then
+            expect(syncResult.name).toEqual("reservation");
+        });
+
+        test("Reservation 데이터 초기화", async () => {
+            // given
+
+            // when
+            const clearResult = await clearTable(reservation);
+
+            // then
+            expect(typeof clearResult).toEqual("number");
+        });
+
+        test("Reservation 초기 데이터 추가", async () => {
+            // given
+
+            // when
             const { recordLength, createResult } = await createDummyData(
-                "house",
-                house,
-                "csv"
+                reservation
             );
 
             // then
-            expect(recordLength === createResult.length).toBeTruthy();
+            expect(recordLength).toEqual(createResult.length);
         });
     });
 });
