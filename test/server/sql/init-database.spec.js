@@ -20,7 +20,7 @@ describe("Sequelize - init-database", () => {
             const syncResult = await createTable(user);
 
             // then
-            expect(syncResult.name === "user").toBeTruthy();
+            expect(syncResult.name).toEqual("user");
         });
 
         test("User 데이터 초기화", async () => {
@@ -30,7 +30,7 @@ describe("Sequelize - init-database", () => {
             const clearResult = await clearTable(user);
 
             // then
-            expect(typeof clearResult === "number").toBeTruthy();
+            expect(typeof clearResult).toEqual("number");
         });
 
         test("User 초기 데이터 추가", async () => {
@@ -44,7 +44,7 @@ describe("Sequelize - init-database", () => {
             );
 
             // then
-            expect(recordLength === createResult.length).toBeTruthy();
+            expect(recordLength).toEqual(createResult.length);
         });
     });
 
@@ -56,7 +56,7 @@ describe("Sequelize - init-database", () => {
             const syncResult = await createTable(house);
 
             // then
-            expect(syncResult.name === "house").toBeTruthy();
+            expect(syncResult.name).toEqual("house");
         });
 
         test("House 데이터 초기화", async () => {
@@ -66,7 +66,7 @@ describe("Sequelize - init-database", () => {
             const clearResult = await clearTable(house);
 
             // then
-            expect(typeof clearResult === "number").toBeTruthy();
+            expect(typeof clearResult).toEqual("number");
         });
 
         test("House 초기 데이터 추가", async () => {
