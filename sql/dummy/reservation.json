@@ -1,0 +1,22 @@
+[{
+    "check_in": "2016-10-02 04:05:02",
+    "check_out": "2016-10-04 04:05:02",
+    "user_id": "dummyId1",
+    "adault": 1,
+    "children": 0,
+    "baby": 1
+}, {
+    "check_in": "2016-10-04 04:05:02",
+    "check_out": "2016-10-07 04:05:02",
+    "user_id": "dummyId2",
+    "adault": 3,
+    "children": 2,
+    "baby": 0
+}, {
+    "check_in": "2016-10-08 04:05:02",
+    "check_out": "2016-10-12 04:05:02",
+    "user_id": "dummyId3",
+    "adault": 4,
+    "children": 0,
+    "baby": 2
+}]
