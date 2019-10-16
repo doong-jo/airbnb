@@ -46,18 +46,15 @@ async function createDummyData(model) {
 
 async function initDatabaseSync() {
     function getTablePromiseArray(model) {
-        return [
-            createTable(model),
-            clearTable(model),
-            createDummyData(model.name, model)
-        ];
+        return [createTable(model), clearTable(model), createDummyData(model)];
     }
 
     function getPromiseList() {
-        const models = Object.values(db);
         let processList = [];
-        for (const model of models) {
-            processList = processList.concat(getTablePromiseArray(model));
+        for (const [name, model] of Object.entries(db)) {
+            if (name !== "sequelize") {
+                processList = processList.concat(getTablePromiseArray(model));
+            }
         }
 
         return processList;
