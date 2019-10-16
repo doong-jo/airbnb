@@ -1,22 +1,7 @@
 import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
-
-const modelNameList = getModelNames();
-
-function getModelNames() {
-    const basename = path.basename(__filename);
-    const nameList = [];
-
-    fs.readdirSync(__dirname)
-        .filter(file => file.indexOf(".") !== 0 && file !== basename)
-        .forEach(file => {
-            const modelName = file.split(".js")[0];
-            nameList.push(modelName);
-        });
-
-    return nameList;
-}
+import db from "../models/db";
 
 async function createTable(model) {
     return await model.sync();
@@ -62,26 +47,27 @@ async function createDummyData(modelName, model) {
 }
 
 async function initDatabaseSync() {
-    function getTablePromiseArray(modelName) {
+    function getTablePromiseArray(model) {
         return [
-            createTable(modelName),
-            clearTable(modelName),
-            createDummyData(modelName)
+            createTable(model),
+            clearTable(model),
+            createDummyData(model.name, model)
         ];
     }
 
     function getPromiseList() {
-        let promiseList = [];
-        modelNameList.forEach(name => {
-            allTablePromises = allTablePromises.concat(
-                getTablePromiseArray(name)
-            );
-        });
-        return promiseList;
+        const models = Object.values(db);
+        let processList = [];
+        for (const model of models) {
+            processList = processList.concat(getTablePromiseArray(model));
+        }
+
+        return processList;
     }
 
     const tablePromises = getPromiseList();
-    await Promise.all(tablePromises);
+    const resultArr = await Promise.all(tablePromises);
+    return resultArr;
 }
 
 module.exports = {

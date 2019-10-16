@@ -3,13 +3,29 @@ describe("Sequelize - init-database", () => {
     const {
         createTable,
         clearTable,
-        createDummyData
+        createDummyData,
+        initDatabaseSync
     } = require("../../../sql/init-database");
-    const { user, house, sequelize } = require("../../../models/db");
+    const {
+        user,
+        house,
+        reservation,
+        sequelize
+    } = require("../../../models/db");
 
     afterAll(async done => {
         sequelize.close();
         done();
+    });
+
+    test("Init all", async () => {
+        // given
+
+        // when
+        const allResult = await initDatabaseSync();
+
+        // then
+        expect(allResult.length).toBeTruthy();
     });
 
     describe("User", () => {
