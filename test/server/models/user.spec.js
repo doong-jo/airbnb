@@ -2,6 +2,11 @@ describe("Model - User", () => {
     const db = require("../../../models/db");
     const { user } = db;
 
+    afterAll(async done => {
+        db.sequelize.close();
+        done();
+    });
+
     test("모든 사용자를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
         const exclude = ["id", "password", "createdAt", "updatedAt"];
@@ -40,10 +45,7 @@ describe("Model - User", () => {
                 }
             }
         );
-
         // then
-        console.log(responseData);
-
         expect(responseData.length).toBeTruthy();
     });
 
@@ -63,7 +65,6 @@ describe("Model - User", () => {
         };
 
         // when
-        console.log("dummy login_id", dummy.login_id);
         const responseData = await user.create(dummy, { returning: true });
 
         // then

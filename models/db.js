@@ -17,6 +17,7 @@ function getImportedAllModels(sequelize) {
             db[modelName].associate(db);
         }
     });
+    db['sequelize'] = sequelize;
 
     return db;
 }

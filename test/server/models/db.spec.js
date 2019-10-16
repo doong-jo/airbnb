@@ -1,7 +1,9 @@
 describe("Model - DB", () => {
-    let db;
-    beforeAll(() => {
-        db = require("../../../models/db");
+    const db = require("../../../models/db");
+
+    afterAll(async done => {
+        db.sequelize.close();
+        done();
     });
 
     test("DB는 모든 모델들을 소유하고 있다.", () => {
@@ -12,7 +14,6 @@ describe("Model - DB", () => {
         const isAllExists = db.user !== undefined && db.house !== undefined; // && db.room ...
 
         // then
-        console.dir("db has models: ", db);
         expect(isAllExists).toBeTruthy();
     });
 });

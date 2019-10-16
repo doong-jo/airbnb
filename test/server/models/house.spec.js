@@ -4,6 +4,11 @@ describe("Model - House", () => {
     const { gte, lte } = Sequelize.Op;
     const { house } = db;
 
+    afterAll(async done => {
+        db.sequelize.close();
+        done();
+    });
+    
     test("인원으로 숙소를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
         const exclude = ["uid", "createdAt", "updatedAt"];

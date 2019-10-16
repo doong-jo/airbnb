@@ -5,7 +5,12 @@ describe("Sequelize - init-database", () => {
         clearTable,
         createDummyData
     } = require("../../../sql/init-database");
-    const { user, house } = require("../../../models/db");
+    const { user, house, sequelize } = require("../../../models/db");
+
+    afterAll(async done => {
+        sequelize.close();
+        done();
+    });
 
     describe("User", () => {
         test("(IF NOT EXITS)User 테이블 생성", async () => {
