@@ -1,5 +1,5 @@
 [{
-    "id": "dummyId1",
+    "login_id": "dummyId1",
     "salt": "10",
     "password": "Boostcamp1!",
     "name": "dummyName1",
@@ -10,7 +10,7 @@
     "favorite": "hobby1,hobby2,hobby3",
     "is_admin": false
 }, {
-    "id": "dummyId2",
+    "login_id": "dummyId2",
     "salt": "10",
     "password": "Boostcamp1!",
     "name": "dummyName2",
@@ -21,7 +21,7 @@
     "favorite": "hobby1,hobby2,hobby3",
     "is_admin": false
 }, {
-    "id": "dummyId3",
+    "login_id": "dummyId3",
     "salt": "10",
     "password": "Boostcamp1!",
     "name": "dummyName3",

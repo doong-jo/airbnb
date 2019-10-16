@@ -1,22 +1,8 @@
-const { generateUUID } = require("../utils/uuid");
-
 module.exports = (sequelize, DataTypes) => {
     const user = sequelize.define(
         "user",
         {
-            uid: {
-                allowNull: false,
-                unique: true,
-                primaryKey: true,
-                type: DataTypes.STRING,
-                defaultValue: () => Buffer.from((generateUUID(), "hex")),
-                get: function() {
-                    return Buffer.from(this.getDataValue("uid")).toString(
-                        "hex"
-                    );
-                }
-            },
-            id: {
+            login_id: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -70,7 +56,8 @@ module.exports = (sequelize, DataTypes) => {
         {
             tableName: "user",
             timestamps: true,
-            freezeTableName: true
+            freezeTableName: true,
+            underscored: true
         }
     );
     // 관계 설정

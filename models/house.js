@@ -2,12 +2,6 @@ module.exports = (sequelize, DataTypes) => {
     const house = sequelize.define(
         "house",
         {
-            uid: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV1,
-                primaryKey: true,
-                allowNull: false
-            },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false

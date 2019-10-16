@@ -1,4 +1,3 @@
-const { generateUUID } = require("../utils/uuid");
 const fs = require("fs");
 const path = require("path");
 const modelNameList = getModelNames();
@@ -54,10 +53,6 @@ async function createDummyData(modelName, model, ext) {
     };
 
     const dummyData = await processByExt[ext]();
-    for (const dummy of dummyData) {
-        dummy.uid = generateUUID();
-    }
-
     const createResult = await model.bulkCreate(dummyData, { logging: false });
     return {
         recordLength: dummyData.length,
