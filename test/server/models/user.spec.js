@@ -9,14 +9,14 @@ describe("Model - User", () => {
 
     test("모든 사용자를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const exclude = ["id", "password", "createdAt", "updatedAt"];
+        const exclude = ["id", "password", "created_at", "updated_at"];
 
         // when
         const responseData = await user.findAll({
             attributes: { exclude }
         });
 
-        // // then
+        // then
         expect(responseData.length).toBeTruthy();
     });
 
@@ -27,7 +27,7 @@ describe("Model - User", () => {
         // when
         const responseData = await user.findOne({ login_id });
 
-        // // then
+        // then
         expect(responseData).toBeTruthy();
     });
 

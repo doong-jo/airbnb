@@ -41,16 +41,6 @@ module.exports = (sequelize, DataTypes) => {
             is_admin: {
                 type: DataTypes.TINYINT,
                 allowNull: false
-            },
-            createdAt: {
-                allowNull: false,
-                type: "TIMESTAMP",
-                defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
-            },
-            updatedAt: {
-                allowNull: false,
-                type: "TIMESTAMP",
-                defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
             }
         },
         {

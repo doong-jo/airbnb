@@ -52,22 +52,13 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
                 defaultValue: "0"
-            },
-            createdAt: {
-                allowNull: false,
-                type: "TIMESTAMP",
-                defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
-            },
-            updatedAt: {
-                allowNull: false,
-                type: "TIMESTAMP",
-                defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
             }
         },
         {
             tableName: "house",
             timestamps: true,
-            freezeTableName: true
+            freezeTableName: true,
+            underscored: true
         }
     );
     // 관계 설정
