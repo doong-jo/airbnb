@@ -1,57 +1,89 @@
-const httpStatus = require("http-status");
+import jwt from "jsonwebtoken";
+import status from "http-status";
+import { user } from "../../models/db";
+import dotenv from "dotenv";
+import Sequelize from "sequelize";
 
-module.exports = passport => {
-    return {
-        isLogined(req, res, next) {
-            if (typeof req.user === "undefined") {
-                res.status(httpStatus.UNAUTHORIZED).end();
-            }
-            res.status(httpStatus.OK);
-            next();
-        },
+dotenv.config();
 
-        isAdmin(req, res, next) {
-            const { user } = req;
-            const isLogin = typeof user !== "undefined";
-            if (isLogin) {
-                const { is_admin } = user;
-                const isAdmin = is_admin === 1;
-                if (isAdmin) {
-                    next();
-                    return;
-                }
-                res.statusCode = httpStatus.UNAUTHORIZED;
-                throw new Error("NOT ADMIN");
-            }
+const {
+    JWT_DEV_EXPIRE,
+    JWT_PROD_EXPIRE,
+    NODE_ENV,
+    ENV_DEV,
+    ENV_PROD,
+    JWT_SECRET
+} = process.env;
 
-            res.status(httpStatus.NOT_FOUND).redirect("/404");
-        },
+function handleJwtError(err, res, next) {
+    console.error(err);
+    res.status(status.INTERNAL_SERVER_ERROR);
+    next();
+}
 
-        clearAuth(req, res) {
-            req.logout();
-            res.send(true);
-        },
+function handleUnauthorized(res, next) {
+    res.status(status.UNAUTHORIZED);
+    next();
+}
 
-        authenticate(req, res, next) {
-            /*
-            , function(err, user, info) {
-                if (err) {
-                    return next(err);
-                }
-                if (!user) {
-                    return res.status(httpStatus.UNAUTHORIZED).json(false);
-                }
-                req.logIn(user, function(err) {
-                    if (err) {
-                        return next(err);
-                    }
-                    return res.status(httpStatus.OK).json(true);
-                });
-                return res.status(httpStatus.UNAUTHORIZED).json(false);
-            }
-            */
-            // return res.status(httpStatus.OK).json(true);
-            passport.authenticate("local")(req, res, next);
+export function generateToken(req, res, next) {
+    const { userId } = req.body;
+    const expiresIn = (() => {
+        if (NODE_ENV === ENV_DEV) {
+            return JWT_DEV_EXPIRE;
+        } else if (NODE_ENV === ENV_PROD) {
+            return JWT_PROD_EXPIRE;
         }
-    };
-};
+    })();
+
+    let userToken;
+    try {
+        userToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn });
+    } catch (err) {
+        return handleJwtError(err, res, next);
+    }
+
+    res.userToken = userToken;
+    next();
+}
+
+export function checkToken(req, res, next) {
+    const { userToken } = req.cookies;
+    if (!userToken) {
+        return handleUnauthorized(res, next);
+    }
+
+    let decoded;
+    try {
+        decoded = jwt.verify(userToken, JWT_SECRET);
+    } catch (err) {
+        return handleJwtError(err, res, next);
+    }
+
+    if (!decoded) {
+        return handleUnauthorized(res, next);
+    }
+
+    res.end(status.OK);
+}
+
+export async function checkLoginInfo(req, res, next) {
+    const { userId, userPwd } = req.body;
+
+    let row;
+    try {
+        const { and } = Sequelize.Op;
+        row = await user.findOne({
+            where: { [and]: { login_id: userId, password: userPwd } }
+        });
+    } catch (err) {
+        return handleJwtError(err, res, next);
+    }
+
+    if (!row) {
+        return handleUnauthorized(res, next);
+    }
+
+    res.status(status.OK);
+    next();
+}
