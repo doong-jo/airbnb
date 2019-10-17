@@ -8,9 +8,8 @@ async function createTable(model) {
 }
 
 async function clearTable(model) {
-    return await model.destroy({
-        where: {},
-        truncate: true
+    return await model.truncate({
+        cascade: true
     });
 }
 
@@ -45,24 +44,25 @@ async function createDummyData(model) {
 }
 
 async function initDatabaseSync() {
-    function getTablePromiseArray(model) {
-        return [createTable(model), clearTable(model), createDummyData(model)];
-    }
+    const { sequelize } = db;
+    const { user, house, reservation } = db;
 
-    function getPromiseList() {
-        let processList = [];
-        for (const [name, model] of Object.entries(db)) {
-            if (name !== "sequelize") {
-                processList = processList.concat(getTablePromiseArray(model));
-            }
-        }
+    console.log("DATABASE INITIALIZING..........");
 
-        return processList;
-    }
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {});
+    // 순서를 지켜야 함
+    await createTable(user);
+    await createTable(house);
+    await createTable(reservation);
+    await clearTable(reservation);
+    await clearTable(user);
+    await clearTable(house);
+    await createDummyData(user);
+    await createDummyData(house);
+    await createDummyData(reservation);
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null, {});
 
-    const tablePromises = getPromiseList();
-    const resultArr = await Promise.all(tablePromises);
-    return resultArr;
+    console.log("--- DEVELOPMENT MODE DATABASE INITIALIZE FINISH ---");
 }
 
 module.exports = {
