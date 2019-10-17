@@ -9,7 +9,9 @@
         "watch": "webpack -d --watch",
         "data-init": "node scripts/reset-data.js",
         "start": "redis-server 2>&1 & npm run build & NODE_ENV=production node app.js",
-        "dev": "redis-server 2>&1 & npm run watch & NODE_ENV=development nodemon app.js",
+        "dev": "redis-server 2>&1 & npm run watch & NODE_ENV=development nodemon --exec babel-node app.js",
+        "nodemon-dev-node": "nodemon --exec babel-node app.js",
+        "dev-node": "babel-node app.js",
         "test": "export NODE_ENV=developement & jest --verbose --runInBand"
     },
     "repository": {
@@ -34,6 +36,8 @@
         }
     },
     "devDependencies": {
+        "@babel/core": "^7.6.4",
+        "@babel/node": "^7.6.3",
         "@babel/preset-env": "^7.6.0",
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
