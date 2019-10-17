@@ -1,49 +1,37 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const logger = require("morgan");
+import express from "express";
+import path from "path";
+import logger from "morgan";
+import notFoundHandler from "./services/handler/notfound-handler";
+import serverInternalHandler from "./services/handler/serverinternal-handler";
+import mainRouter from "./routes/index";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-
-const notFoundHandler = require("./services/handler/notfound-handler");
-const serverInternalHandler = require("./services/handler/serverinternal-handler");
-const mainRouter = require("./routes/index");
-
-const _ = require("./services/constants");
 
 const PORT = 80;
 const STATIC_PATH = express.static(path.join(__dirname, "public"));
 const HTML_FILE = path.join(__dirname, "public/index.html");
-
 const { NODE_ENV, ENV_DEV, ENV_PROD } = process.env;
-process.env.NODE_ENV = NODE_ENV || ENV_DEV;
 
-if (process.env.NODE_ENV === ENV_DEV) {
+if (!NODE_ENV || NODE_ENV === ENV_DEV) {
+    process.env.NODE_ENV = ENV_DEV;
     console.log("--- DEVELOPMENT MODE ---");
     const { initDatabaseSync } = require("./sql/init-database");
-    (async function() {
-        console.log("--- DEVELOPMENT MODE DATABASE INITIALIZE ---");
-        await initDatabaseSync();
-    })();
+    initDatabaseSync();
     app.use(logger("dev"));
 } else if (process.env.NODE_ENV === ENV_PROD) {
     console.log("--- PRODUCTION MODE ---");
 }
 
-const passport = require("./services/passport")(app);
-
 app.use(express.json());
-app.use(
-    express.urlencoded({
-        extended: false
-    })
-);
-
+app.use(express.urlencoded({ extended: false }));
 app.use(STATIC_PATH);
+
 app.get("/", (req, res) => {
     res.sendFile(HTML_FILE);
 });
-app.use("/", mainRouter(passport));
+app.use("/", mainRouter);
 app.use(notFoundHandler);
 app.use(serverInternalHandler);
 
@@ -51,4 +39,4 @@ app.listen(process.env.PORT || PORT, () => {
     console.log(`Listening ${PORT}...`);
 });
 
-module.exports = { app, passport };
+export default app;
