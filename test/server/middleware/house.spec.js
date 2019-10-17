@@ -2,10 +2,10 @@ import httpMocks from "node-mocks-http";
 import status from "http-status";
 import { sequelize } from "../../../models/db";
 import {
-    findByPeople,
-    findByType,
-    findByPriceRange,
-    findByRoomAndBed
+    conveyByPeople,
+    conveyByType,
+    conveyByPriceRange,
+    conveyByRoomAndBed
 } from "../../../services/middleware/house";
 
 describe("Middleware - House", () => {
@@ -26,7 +26,7 @@ describe("Middleware - House", () => {
         const next = jest.fn();
 
         // when
-        await findByPeople(req, res, next);
+        await conveyByPeople(req, res, next);
 
         // then
         expect(res.get("Content-Type")).toEqual("application/json");
@@ -43,7 +43,7 @@ describe("Middleware - House", () => {
         const next = jest.fn();
 
         // when
-        await findByType(req, res, next);
+        await conveyByType(req, res, next);
 
         // then
         expect(res.get("Content-Type")).toEqual("application/json");
@@ -61,7 +61,7 @@ describe("Middleware - House", () => {
         const next = jest.fn();
 
         // when
-        await findByPriceRange(req, res, next);
+        await conveyByPriceRange(req, res, next);
 
         // then
         expect(res.get("Content-Type")).toEqual("application/json");
@@ -80,7 +80,7 @@ describe("Middleware - House", () => {
         const next = jest.fn();
 
         // when
-        await findByRoomAndBed(req, res, next);
+        await conveyByRoomAndBed(req, res, next);
 
         // then
         expect(res.get("Content-Type")).toEqual("application/json");

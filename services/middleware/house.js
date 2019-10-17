@@ -1,10 +1,10 @@
 import status from "http-status";
-import { house } from "../../models/db";
-import Sequelize from "sequelize";
-
-const { gte, lte } = Sequelize.Op;
-const maxHouseLimit = 10;
-const exclude = ["id", "created_at", "updated_at"];
+import {
+    findByPeople,
+    findByType,
+    findByPriceRange,
+    findByRoomAndBed
+} from "../../repo/house-finder";
 
 function handleError(err, res, next) {
     console.error(err);
@@ -12,17 +12,13 @@ function handleError(err, res, next) {
     return next();
 }
 
-export async function findByPeople(req, res, next) {
+export async function conveyByPeople(req, res, next) {
     const { adult, child, baby } = req.query;
     const people = Math.ceil(adult + child + baby);
 
     let row;
     try {
-        row = await house.findAll({
-            attributes: { exclude },
-            where: { capacity: { [gte]: people } },
-            limit: maxHouseLimit
-        });
+        row = await findByPeople(people);
     } catch (err) {
         return handleError(err, res, next);
     }
@@ -30,16 +26,12 @@ export async function findByPeople(req, res, next) {
     return res.json(row);
 }
 
-export async function findByType(req, res, next) {
+export async function conveyByType(req, res, next) {
     const { type } = req.query;
 
     let row;
     try {
-        row = await house.findAll({
-            attributes: { exclude },
-            where: { type },
-            limit: maxHouseLimit
-        });
+        row = await findByType(type);
     } catch (err) {
         return handleError(err, res, next);
     }
@@ -47,21 +39,12 @@ export async function findByType(req, res, next) {
     return res.json(row);
 }
 
-export async function findByPriceRange(req, res, next) {
+export async function conveyByPriceRange(req, res, next) {
     const { minPrice, maxPrice } = req.query;
 
     let row;
     try {
-        row = await house.findAll({
-            attributes: { exclude },
-            where: {
-                price: {
-                    [gte]: minPrice,
-                    [lte]: maxPrice
-                }
-            },
-            limit: maxHouseLimit
-        });
+        row = await findByPriceRange(minPrice, maxPrice);
     } catch (err) {
         return handleError(err, res, next);
     }
@@ -69,20 +52,12 @@ export async function findByPriceRange(req, res, next) {
     return res.json(row);
 }
 
-export async function findByRoomAndBed(req, res, next) {
+export async function conveyByRoomAndBed(req, res, next) {
     const { minBed, minBedRoom, minBathRoom } = req.query;
 
     let row;
     try {
-        row = await house.findAll({
-            attributes: { exclude },
-            where: {
-                bed: { [gte]: minBed },
-                bedroom: { [gte]: minBedRoom },
-                bathroom: { [gte]: minBathRoom }
-            },
-            limit: maxHouseLimit
-        });
+        row = await findByRoomAndBed(minBed, minBedRoom, minBathRoom);
     } catch (err) {
         return handleError(err, res, next);
     }
