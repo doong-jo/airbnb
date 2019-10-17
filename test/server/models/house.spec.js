@@ -12,7 +12,7 @@ describe("Model - House", () => {
 
     test("인원으로 숙소를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const exclude = ["uid", "created_at", "updated_at"];
+        const exclude = ["id", "created_at", "updated_at"];
         const reqPerson = 3;
 
         // when
@@ -32,7 +32,7 @@ describe("Model - House", () => {
 
     test("유형으로 숙소를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const exclude = ["uid", "created_at", "updated_at"];
+        const exclude = ["id", "created_at", "updated_at"];
         const type = "Hotel room";
 
         // when
@@ -48,7 +48,7 @@ describe("Model - House", () => {
 
     test("최소/최대 금액 값으로 숙소를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const exclude = ["uid", "created_at", "updated_at"];
+        const exclude = ["id", "created_at", "updated_at"];
         const minPrice = 50;
         const maxPrice = 70;
 
@@ -70,7 +70,7 @@ describe("Model - House", () => {
 
     test("침대/침실/욕실로 숙소를 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const exclude = ["uid", "created_at", "updated_at"];
+        const exclude = ["id", "created_at", "updated_at"];
         const minBed = 2;
         const minBedRoom = 2;
         const minBathRoom = 1;
