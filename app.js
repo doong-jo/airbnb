@@ -17,7 +17,7 @@ const { NODE_ENV, ENV_DEV, ENV_PROD } = process.env;
 if (!NODE_ENV || NODE_ENV === ENV_DEV) {
     process.env.NODE_ENV = ENV_DEV;
     console.log("--- DEVELOPMENT MODE ---");
-    const { initDatabaseSync } = require("./sql/init-database");
+    const { initDatabaseSync } = require("./sql/db-initializer");
     initDatabaseSync();
     app.use(logger("dev"));
 } else if (process.env.NODE_ENV === ENV_PROD) {

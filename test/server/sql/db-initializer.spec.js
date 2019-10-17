@@ -1,17 +1,11 @@
-// db.Publisher.sync();
-describe("Sequelize - init-database", () => {
-    const {
-        createTable,
-        clearTable,
-        createDummyData
-    } = require("../../../sql/init-database");
-    const {
-        user,
-        house,
-        reservation,
-        sequelize
-    } = require("../../../models/db");
+import {
+    createTable,
+    clearTable,
+    createDummyData
+} from "../../../sql/db-initializer";
+import { user, house, reservation, sequelize } from "../../../models/db";
 
+describe("Sequelize - db-initializer", () => {
     beforeAll(async () => {
         await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {});
     });
