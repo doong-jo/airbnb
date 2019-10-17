@@ -1,7 +1,9 @@
 import db from "../../../models/db";
+import Sequelize from "sequelize";
 
 describe("Model - User", () => {
     const { user } = db;
+    const { and } = Sequelize.Op;
 
     afterAll(async done => {
         db.sequelize.close();
@@ -21,12 +23,26 @@ describe("Model - User", () => {
         expect(responseData.length).toBeTruthy();
     });
 
+    test("아이디/비밀번호가 일치하는 사용자를 조회한다", async () => {
+        // given : 데이터는 Test DB에 이미 등록되어 있음
+        const login_id = "dummyId1";
+        const password = "Boostcamp1!";
+
+        // when
+        const responseData = await user.findOne({
+            where: { [and]: { login_id, password } }
+        });
+
+        // then
+        expect(responseData).toBeTruthy();
+    });
+
     test("사용자를 아이디로 조회한다.", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
         const login_id = "dummyId1";
 
         // when
-        const responseData = await user.findOne({ login_id });
+        const responseData = await user.findOne({ where: { login_id } });
 
         // then
         expect(responseData).toBeTruthy();
@@ -34,8 +50,8 @@ describe("Model - User", () => {
 
     test("사용자의 하나 이상의 필드 값 수정", async () => {
         // given : 데이터는 Test DB에 이미 등록되어 있음
-        const name = "updatedName";
-        const login_id = "dummyId1";
+        const name = "dummyId1";
+        const login_id = "Boostcamp1!";
 
         // when
         const responseData = await user.update(
