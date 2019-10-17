@@ -3,8 +3,7 @@ describe("Sequelize - init-database", () => {
     const {
         createTable,
         clearTable,
-        createDummyData,
-        initDatabaseSync
+        createDummyData
     } = require("../../../sql/init-database");
     const {
         user,
@@ -13,22 +12,16 @@ describe("Sequelize - init-database", () => {
         sequelize
     } = require("../../../models/db");
 
-    afterAll(async done => {
+    beforeAll(async () => {
+        await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {});
+    });
+
+    afterAll(async () => {
+        await sequelize.query("SET FOREIGN_KEY_CHECKS = 1", null, {});
         sequelize.close();
-        done();
     });
 
-    test("Init all", async () => {
-        // given
-
-        // when
-        const allResult = await initDatabaseSync();
-
-        // then
-        expect(allResult.length).toBeTruthy();
-    });
-
-    describe("User", () => {
+    describe("전체 테이블 생성", () => {
         test("(IF NOT EXITS)User 테이블 생성", async () => {
             // given
 
@@ -37,6 +30,38 @@ describe("Sequelize - init-database", () => {
 
             // then
             expect(syncResult.name).toEqual("user");
+        });
+
+        test("(IF NOT EXITS)House 테이블 생성", async () => {
+            // given
+
+            // when
+            const syncResult = await createTable(house);
+
+            // then
+            expect(syncResult.name).toEqual("house");
+        });
+
+        test("(IF NOT EXITS)Reservation 테이블 생성", async () => {
+            // given
+
+            // when
+            const syncResult = await createTable(reservation);
+
+            // then
+            expect(syncResult.name).toEqual("reservation");
+        });
+    });
+
+    describe("전체 테이블 초기화", () => {
+        test("Reservation 데이터 초기화", async () => {
+            // given
+
+            // when
+            const clearResult = await clearTable(reservation);
+
+            // then
+            expect(typeof clearResult).toEqual("number");
         });
 
         test("User 데이터 초기화", async () => {
@@ -49,28 +74,6 @@ describe("Sequelize - init-database", () => {
             expect(typeof clearResult).toEqual("number");
         });
 
-        test("User 초기 데이터 추가", async () => {
-            // given
-
-            // when
-            const { recordLength, createResult } = await createDummyData(user);
-
-            // then
-            expect(recordLength).toEqual(createResult.length);
-        });
-    });
-
-    describe("House", () => {
-        test("(IF NOT EXITS)House 테이블 생성", async () => {
-            // given
-
-            // when
-            const syncResult = await createTable(house);
-
-            // then
-            expect(syncResult.name).toEqual("house");
-        });
-
         test("House 데이터 초기화", async () => {
             // given
 
@@ -79,6 +82,18 @@ describe("Sequelize - init-database", () => {
 
             // then
             expect(typeof clearResult).toEqual("number");
+        });
+    });
+
+    describe("전체 테이블 초기데이터 추가", () => {
+        test("User 초기 데이터 추가", async () => {
+            // given
+
+            // when
+            const { recordLength, createResult } = await createDummyData(user);
+
+            // then
+            expect(recordLength).toEqual(createResult.length);
         });
 
         test("House 초기 데이터 추가", async () => {
@@ -89,28 +104,6 @@ describe("Sequelize - init-database", () => {
 
             // then
             expect(recordLength).toEqual(createResult.length);
-        });
-    });
-
-    describe("Reservation", () => {
-        test("(IF NOT EXITS)Reservation 테이블 생성", async () => {
-            // given
-
-            // when
-            const syncResult = await createTable(reservation);
-
-            // then
-            expect(syncResult.name).toEqual("reservation");
-        });
-
-        test("Reservation 데이터 초기화", async () => {
-            // given
-
-            // when
-            const clearResult = await clearTable(reservation);
-
-            // then
-            expect(typeof clearResult).toEqual("number");
         });
 
         test("Reservation 초기 데이터 추가", async () => {
