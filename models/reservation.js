@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
             check_out: {
                 type: DataTypes.DATE
             },
-            adault: {
+            adult: {
                 type: DataTypes.INTEGER
             },
-            children: {
+            child: {
                 type: DataTypes.INTEGER
             },
             baby: {

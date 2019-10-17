@@ -1,24 +1,24 @@
 [{
     "check_in": "2016-10-02 00:00:00",
     "check_out": "2016-10-04 00:00:00",
-    "adault": 1,
-    "children": 0,
+    "adult": 1,
+    "child": 0,
     "baby": 1,
     "user_id": "1",
     "house_id": "1"
 }, {
     "check_in": "2016-10-07 00:00:00",
     "check_out": "2016-10-08 00:00:00",
-    "adault": 3,
-    "children": 2,
+    "adult": 3,
+    "child": 2,
     "baby": 0,
     "user_id": "2",
     "house_id": "2"
 }, {
     "check_in": "2016-10-09 00:00:00",
     "check_out": "2016-10-11 00:00:00",
-    "adault": 4,
-    "children": 0,
+    "adult": 4,
+    "child": 0,
     "baby": 2,
     "user_id": "3",
     "house_id": "3"
