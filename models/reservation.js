@@ -1,5 +1,4 @@
 import { disallowNull } from "../utils/sequel";
-import { user, house } from "../models/db";
 
 module.exports = (sequelize, DataTypes) => {
     const reservation = sequelize.define(
@@ -19,12 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             baby: {
                 type: DataTypes.INTEGER
-            },
-            user_id: {
-                type: DataTypes.INTEGER
-            },
-            house_id: {
-                type: DataTypes.INTEGER
             }
         }),
         {
@@ -37,14 +30,12 @@ module.exports = (sequelize, DataTypes) => {
     // 관계 설정
     reservation.associate = function(models) {
         reservation.belongsTo(models.user, {
-            foreignKey: "id",
-            sourceKey: "user_id",
+            foreignKey: "user_id",
             onDelete: "cascade",
             onUpdate: "cascade"
         });
         reservation.belongsTo(models.house, {
-            foreignKey: "id",
-            sourceKey: "house_id",
+            foreignKey: "house_id",
             onDelete: "cascade",
             onUpdate: "cascade"
         });
