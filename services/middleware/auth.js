@@ -64,7 +64,8 @@ export function checkToken(req, res, next) {
         return handleUnauthorized(res, next);
     }
 
-    res.end(status.OK);
+    res.status(status.OK);
+    next();
 }
 
 export async function checkLoginInfo(req, res, next) {
