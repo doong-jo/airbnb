@@ -1,7 +1,13 @@
-export default function(err, req, res) {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get("env") === "development" ? err : {};
+import status from "http-status";
 
-    res.status(err.status || 500);
-    res.render("error");
+export default function(req, res, next) {
+    if (res.statusCode === status.INTERNAL_SERVER_ERROR) {
+        res.locals.message = err.message;
+        res.locals.error = req.app.get("env") === "development" ? err : {};
+
+        res.status(err.status || 500);
+        res.render("error");
+    }
+
+    next();
 }
