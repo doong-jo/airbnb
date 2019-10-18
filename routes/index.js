@@ -1,29 +1,18 @@
-const httpStatus = require("http-status");
-const router = require("express").Router();
+import httpStatus from "http-status";
+import express from "express";
+import authRouter from "./auth";
+import { checkToken, generateToken } from "../services/middleware/auth";
 
-const authRouter = require("./auth");
-const userRouter = require("./user");
-const carouselRouter = require("./carousel");
-const adminRouter = require("./admin");
+const router = express.Router();
 
-const mainRouter = passport => {
-    const routes = {
-        "/auth": authRouter(passport),
-        "/user": userRouter,
-        "/carousel": carouselRouter,
-        "/admin": adminRouter
-    };
-
-    for (const [path, route] of Object.entries(routes)) {
-        router.use(path, route);
-    }
-
-    router.use((req, res, next) => {
-        res.statusCode = httpStatus.NOT_FOUND;
-        next();
-    });
-
-    return router;
+const routes = {
+    "/auth": authRouter
 };
 
-module.exports = mainRouter;
+router.use(checkToken);
+
+for (const [path, route] of Object.entries(routes)) {
+    router.use(path, route);
+}
+
+export default router;
