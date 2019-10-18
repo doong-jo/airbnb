@@ -5,6 +5,7 @@ import notFoundHandler from "./services/handler/notfound-handler";
 import serverInternalHandler from "./services/handler/serverinternal-handler";
 import mainRouter from "./routes/index";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
@@ -26,6 +27,7 @@ if (!NODE_ENV || NODE_ENV === ENV_DEV) {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(STATIC_PATH);
 
 app.get("/", (req, res) => {
