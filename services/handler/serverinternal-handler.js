@@ -1,13 +1,9 @@
 import status from "http-status";
 
-export default function(req, res, next) {
-    if (res.statusCode === status.INTERNAL_SERVER_ERROR) {
-        res.locals.message = err.message;
-        res.locals.error = req.app.get("env") === "development" ? err : {};
+export default function(err, req, res, next) {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get("env") === "development" ? err : {};
 
-        res.status(err.status || 500);
-        res.render("error");
-    }
-
-    next();
+    res.status(err.status || 500);
+    res.render("error");
 }

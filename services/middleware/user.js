@@ -4,16 +4,21 @@ import { user } from "../../models/db";
 export async function checkExists(req, res, next) {
     const { userId } = req.query;
 
-    const result = await user.findOne({
-        where: { login_id: userId }
-    });
+    let result;
+    try {
+        result = await user.findOne({
+            where: { login_id: userId }
+        });
+    } catch (err) {
+        return next(err);
+    }
 
     if (!result) {
-        res.status(status.FORBIDDEN);
-        return next();
+        res.status(status.FORBIDDEN).end();
     }
+
     res.status(status.OK);
-    return next();
+    next();
 }
 
 export async function signup(req, res, next) {
@@ -22,10 +27,9 @@ export async function signup(req, res, next) {
     try {
         await user.create(newUser);
     } catch (err) {
-        res.status(status.FORBIDDEN);
-        return next();
+        return res.status(status.FORBIDDEN).end();
     }
 
     res.status(status.OK);
-    return next();
+    next();
 }

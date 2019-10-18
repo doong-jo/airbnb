@@ -15,18 +15,17 @@ const {
     JWT_SECRET
 } = process.env;
 
-function handleJwtError(err, res, next) {
+function handleJwtError(err, next) {
     console.error(err);
-    res.status(status.INTERNAL_SERVER_ERROR);
-    next();
+    next(err);
 }
 
 function handleUnauthorized(res, next) {
-    res.status(status.UNAUTHORIZED);
-    next();
+    res.status(status.UNAUTHORIZED).end();
 }
 
 export function generateToken(req, res, next) {
+    console.log("generateToken In");
     const { userId } = req.body;
     const expiresIn = (() => {
         if (NODE_ENV === ENV_DEV) {
@@ -40,24 +39,25 @@ export function generateToken(req, res, next) {
     try {
         userToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn });
     } catch (err) {
-        return handleJwtError(err, res, next);
+        return handleJwtError(err, next);
     }
 
+    res.status(status.OK);
     res.userToken = userToken;
     next();
 }
 
 export function checkToken(req, res, next) {
-    const { userToken } = req.cookies;
-    if (!userToken) {
+    if (!req.cookies || !req.cookies.userToken) {
         return handleUnauthorized(res, next);
     }
+    const { userToken } = req.cookies;
 
     let decoded;
     try {
         decoded = jwt.verify(userToken, JWT_SECRET);
     } catch (err) {
-        return handleJwtError(err, res, next);
+        return handleJwtError(err, next);
     }
 
     if (!decoded) {
@@ -69,6 +69,7 @@ export function checkToken(req, res, next) {
 }
 
 export async function checkLoginInfo(req, res, next) {
+    console.log("logininfo In");
     const { userId, userPwd } = req.body;
 
     let row;
@@ -78,13 +79,15 @@ export async function checkLoginInfo(req, res, next) {
             where: { [and]: { login_id: userId, password: userPwd } }
         });
     } catch (err) {
-        return handleJwtError(err, res, next);
+        return handleJwtError(err, next);
     }
 
     if (!row) {
+        console.log("no match logininfo");
         return handleUnauthorized(res, next);
     }
 
     res.status(status.OK);
     next();
+    console.log("success logininfo");
 }

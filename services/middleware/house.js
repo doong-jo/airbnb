@@ -6,10 +6,9 @@ import {
     findByRoomAndBed
 } from "../../repo/house-finder";
 
-function handleError(err, res, next) {
+function handleError(err, next) {
     console.error(err);
-    res.status(status.INTERNAL_SERVER_ERROR);
-    return next();
+    next(err);
 }
 
 export async function conveyByPeople(req, res, next) {
@@ -20,7 +19,7 @@ export async function conveyByPeople(req, res, next) {
     try {
         row = await findByPeople(people);
     } catch (err) {
-        return handleError(err, res, next);
+        return handleError(err, next);
     }
 
     return res.json(row);
@@ -33,7 +32,7 @@ export async function conveyByType(req, res, next) {
     try {
         row = await findByType(type);
     } catch (err) {
-        return handleError(err, res, next);
+        return handleError(err, next);
     }
 
     return res.json(row);
@@ -46,7 +45,7 @@ export async function conveyByPriceRange(req, res, next) {
     try {
         row = await findByPriceRange(minPrice, maxPrice);
     } catch (err) {
-        return handleError(err, res, next);
+        return handleError(err, next);
     }
 
     return res.json(row);
@@ -59,7 +58,7 @@ export async function conveyByRoomAndBed(req, res, next) {
     try {
         row = await findByRoomAndBed(minBed, minBedRoom, minBathRoom);
     } catch (err) {
-        return handleError(err, res, next);
+        return handleError(err, next);
     }
 
     return res.json(row);
