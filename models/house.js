@@ -54,7 +54,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    house.associate = function(models) {};
+    house.associate = function(models) {
+        house.hasMany(models.reservation, {
+            foreignKey: "house_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
+        });
+    };
 
     house.insertDataType = "csv";
     return house;

@@ -42,8 +42,14 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true
         }
     );
-    // 관계 설정
-    user.associate = function(models) {};
+
+    user.associate = function(models) {
+        user.hasMany(models.reservation, {
+            foreignKey: "user_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
+        });
+    };
 
     user.insertDataType = "json";
     return user;

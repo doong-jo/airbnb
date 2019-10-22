@@ -18,6 +18,12 @@ module.exports = (sequelize, DataTypes) => {
             },
             baby: {
                 type: DataTypes.INTEGER
+            },
+            house_id: {
+                type: DataTypes.INTEGER
+            },
+            user_id: {
+                type: DataTypes.INTEGER
             }
         }),
         {
@@ -27,19 +33,8 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true
         }
     );
-    // 관계 설정
-    reservation.associate = function(models) {
-        reservation.belongsTo(models.user, {
-            foreignKey: "user_id",
-            onDelete: "cascade",
-            onUpdate: "cascade"
-        });
-        reservation.belongsTo(models.house, {
-            foreignKey: "house_id",
-            onDelete: "cascade",
-            onUpdate: "cascade"
-        });
-    };
+
+    reservation.associate = function(models) {};
 
     reservation.insertDataType = "json";
     return reservation;
