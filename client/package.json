@@ -2,10 +2,6 @@
   "name": "client",
   "version": "0.0.1",
   "description": "react app",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doong-jo/membership-airbnb.git"
@@ -19,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/doong-jo/membership-airbnb/issues"
   },
-  "homepage": "https://github.com/doong-jo/membership-airbnb#readme"
+  "homepage": "https://github.com/doong-jo/membership-airbnb#readme",
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-plugin-react": "^7.16.0"
+  }
 }
