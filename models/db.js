@@ -20,7 +20,6 @@ function getImportedAllModels(sequelize) {
             db[modelName].associate(db);
         }
     });
-    db["sequelize"] = sequelize;
 
     return db;
 }
@@ -60,6 +59,11 @@ function getSequelizeInstance() {
 function getDatabaseModel() {
     const sequelize = getSequelizeInstance();
     const db = getImportedAllModels(sequelize);
+    db["sequelize"] = sequelize;
+    db.errorHandler = err => {
+        console.error(err.sql);
+        throw new Error(err.sql);
+    };
 
     return db;
 }
