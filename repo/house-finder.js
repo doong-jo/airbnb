@@ -19,7 +19,10 @@ const defaultOptions = {
 function mergeFilters(filters, options) {
     const filterData = Object.entries(filters);
     const mergedFilter = filterData.reduce((acc, filter) => {
-        const [name, value] = filter;
+        let [name, value] = filter;
+        if (!value.length) {
+            value = [value];
+        }
         acc = deepmerge(acc, houseFilter[name](...value));
         return acc;
     }, {});
