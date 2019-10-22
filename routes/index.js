@@ -1,15 +1,12 @@
-import httpStatus from "http-status";
 import express from "express";
 import authRouter from "./auth";
-import { checkToken, generateToken } from "../services/middleware/auth";
+import houseRouter from "./house";
 
 const router = express.Router();
-
 const routes = {
-    "/auth": authRouter
+    "/auth": authRouter,
+    "/house": houseRouter
 };
-
-router.use(checkToken);
 
 for (const [path, route] of Object.entries(routes)) {
     router.use(path, route);
