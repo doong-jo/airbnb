@@ -1,133 +1,46 @@
-import db from "../models/db";
 import Sequelize from "sequelize";
+import deepmerge from "deepmerge";
+import { setDefaultValue } from "../utils/object";
 
-const { gte, lte, between, or, notIn } = Sequelize.Op;
+import db from "../models/db";
+import houseFilter from "./house-filter";
+
+const { and } = Sequelize.Op;
 const { house } = db;
 
-const exclude = ["id", "created_at", "updated_at"];
-const maxHouseLimit = 10;
+const defaultOptions = {
+    exclude: ["id", "created_at", "updated_at"],
+    limit: 10,
+    raw: true,
+    logging: false
+};
 
-function handleError(err) {
-    console.error(err.sql);
-    throw new Error(err.sql);
+// 모든 필터의 검색 조건을 합친다.
+function mergeFilters(filters, options) {
+    const filterData = Object.entries(filters);
+    const mergedFilter = filterData.reduce((acc, filter) => {
+        const [name, value] = filter;
+        acc = deepmerge(acc, houseFilter[name](...value));
+        return acc;
+    }, {});
+
+    const mergedOptions = Object.assign(mergedFilter, options);
+    mergedOptions.where = { [and]: mergedOptions.where };
+    return mergedOptions;
 }
 
-export async function findAvailableHouse(userCheckIn, userCheckOut) {
-    async function findReservedIds(userCheckIn, userCheckOut) {
-        const { reservation } = db;
-        const attributes = ["house_id"];
+export default {
+    async find(filters, options) {
+        const findOptions = mergeFilters(filters, options);
+        setDefaultValue(findOptions, defaultOptions);
 
-        let row = [];
+        let row;
         try {
-            row = await reservation.findAll({
-                attributes,
-                where: {
-                    [or]: {
-                        check_in: { [between]: [userCheckIn, userCheckOut] },
-                        check_out: { [between]: [userCheckIn, userCheckOut] }
-                    }
-                }
-            });
+            row = await house.findAll(findOptions);
         } catch (err) {
-            handleError(err);
+            db.errorHandler(err);
         }
 
-        const reservedHouseIds = row.reduce((acc, cur) => {
-            acc.push(cur.dataValues.house_id);
-            return acc;
-        }, []);
-
-        return reservedHouseIds;
+        return row;
     }
-
-    async function fineNotReservedIds(rsrvIds) {
-        let houses = [];
-        try {
-            houses = await house.findAll({
-                attributes: { exclude },
-                where: {
-                    id: { [notIn]: rsrvIds }
-                },
-                limit: maxHouseLimit
-            });
-        } catch (err) {
-            handleError(err);
-        }
-
-        return houses;
-    }
-
-    const reservedHouseIds = await findReservedIds(userCheckIn, userCheckOut);
-    const availableHouses = await fineNotReservedIds(reservedHouseIds);
-
-    return availableHouses;
-}
-
-export async function findByPeople(people) {
-    let houses;
-    try {
-        houses = await house.findAll({
-            attributes: { exclude },
-            where: { capacity: { [gte]: people } },
-            limit: maxHouseLimit
-        });
-    } catch (err) {
-        handleError(err);
-    }
-
-    return houses;
-}
-
-export async function findByType(type) {
-    let houses;
-    try {
-        houses = await house.findAll({
-            attributes: { exclude },
-            where: { type },
-            limit: maxHouseLimit
-        });
-    } catch (err) {
-        handleError(err);
-    }
-
-    return houses;
-}
-
-export async function findByPriceRange(minPrice, maxPrice) {
-    let houses;
-    try {
-        houses = await house.findAll({
-            attributes: { exclude },
-            where: {
-                price: {
-                    [gte]: minPrice,
-                    [lte]: maxPrice
-                }
-            },
-            limit: maxHouseLimit
-        });
-    } catch (err) {
-        handleError(err);
-    }
-
-    return houses;
-}
-
-export async function findByRoomAndBed(minBed, minBedRoom, minBathRoom) {
-    let houses;
-    try {
-        houses = await house.findAll({
-            attributes: { exclude },
-            where: {
-                bed: { [gte]: minBed },
-                bedroom: { [gte]: minBedRoom },
-                bathroom: { [gte]: minBathRoom }
-            },
-            limit: maxHouseLimit
-        });
-    } catch (err) {
-        handleError(err);
-    }
-
-    return houses;
-}
+};
