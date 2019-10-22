@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "0.0.1",
+  "description": "react app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doong-jo/membership-airbnb.git"
+  },
+  "keywords": [
+    "react",
+    "airbnb"
+  ],
+  "author": "Sungdong Jo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doong-jo/membership-airbnb/issues"
+  },
+  "homepage": "https://github.com/doong-jo/membership-airbnb#readme"
+}
