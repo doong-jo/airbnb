@@ -2,10 +2,10 @@ import {
     createTable,
     clearTable,
     createDummyData
-} from "../../../sql/db-initializer";
+} from "../../../db/db-initializer";
 import { user, house, reservation, sequelize } from "../../../models/db";
 
-describe("Sequelize - db-initializer", () => {
+describe("DB - db-initializer", () => {
     beforeAll(async () => {
         await sequelize.query("SET FOREIGN_KEY_CHECKS = 0", null, {});
     });
