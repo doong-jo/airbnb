@@ -2,7 +2,7 @@ import httpMocks from "node-mocks-http";
 import supertest from "supertest";
 import status from "http-status";
 const agent = supertest.agent("http://localhost");
-import { generateToken } from "../../../services/middleware/auth";
+import { generateToken } from "../../../middleware/auth";
 
 describe("Routes - Auth", () => {
     test("POST /auth/passport", async () => {
@@ -16,9 +16,10 @@ describe("Routes - Auth", () => {
             const res = httpMocks.createResponse();
             const next = jest.fn();
             generateToken(req, res, next);
-            return res.userToken;
+            return req.userToken;
         }
         const token = makeMockToken();
+
         // when
         const response = await agent
             .post("/auth/passport")
@@ -40,6 +41,5 @@ describe("Routes - Auth", () => {
 
         // then
         expect(response.statusCode).toEqual(status.OK);
-        expect(response.userToken).toBeTruthy();
     });
 });
