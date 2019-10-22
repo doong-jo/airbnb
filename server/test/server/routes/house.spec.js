@@ -1,7 +1,6 @@
 import supertest from "supertest";
 import status from "http-status";
 const agent = supertest.agent("http://localhost");
-import {} from "../../../middleware/house";
 
 describe("Routes - House", () => {
     test("GET /house", async () => {
