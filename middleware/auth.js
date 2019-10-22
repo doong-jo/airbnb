@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import status from "http-status";
-import { user } from "../../models/db";
+import { user } from "../models/db";
 import dotenv from "dotenv";
 import Sequelize from "sequelize";
 
@@ -15,17 +15,17 @@ const {
     JWT_SECRET
 } = process.env;
 
-function handleJwtError(err, next) {
+function handleUnauthorized(res, next) {
+    res.status(status.UNAUTHORIZED).end();
+    next();
+}
+
+function handleError(err, next) {
     console.error(err);
     next(err);
 }
 
-function handleUnauthorized(res, next) {
-    res.status(status.UNAUTHORIZED).end();
-}
-
 export function generateToken(req, res, next) {
-    console.log("generateToken In");
     const { userId } = req.body;
     const expiresIn = (() => {
         if (NODE_ENV === ENV_DEV) {
@@ -39,11 +39,16 @@ export function generateToken(req, res, next) {
     try {
         userToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn });
     } catch (err) {
-        return handleJwtError(err, next);
+        return handleError(err, next);
     }
 
     res.status(status.OK);
-    res.userToken = userToken;
+    req.userToken = userToken;
+    res.cookie("userToken", userToken, {
+        expires: new Date(Date.now() + 24 * 3600000) // cookie will be removed after 24 hours
+        // httpOnly: true, // http only, prevents JavaScript cookie access
+        // secure: true // cookie must be sent over https / ssl
+    });
     next();
 }
 
@@ -57,7 +62,7 @@ export function checkToken(req, res, next) {
     try {
         decoded = jwt.verify(userToken, JWT_SECRET);
     } catch (err) {
-        return handleJwtError(err, next);
+        return handleUnauthorized(res, next);
     }
 
     if (!decoded) {
@@ -69,9 +74,7 @@ export function checkToken(req, res, next) {
 }
 
 export async function checkLoginInfo(req, res, next) {
-    console.log("logininfo In");
     const { userId, userPwd } = req.body;
-
     let row;
     try {
         const { and } = Sequelize.Op;
@@ -79,7 +82,7 @@ export async function checkLoginInfo(req, res, next) {
             where: { [and]: { login_id: userId, password: userPwd } }
         });
     } catch (err) {
-        return handleJwtError(err, next);
+        return handleError(err, next);
     }
 
     if (!row) {
@@ -88,6 +91,6 @@ export async function checkLoginInfo(req, res, next) {
     }
 
     res.status(status.OK);
-    next();
     console.log("success logininfo");
+    next();
 }

@@ -2,7 +2,7 @@ import {
     generateToken,
     checkToken,
     checkLoginInfo
-} from "../../../services/middleware/auth";
+} from "../../../middleware/auth";
 import httpMocks from "node-mocks-http";
 import status from "http-status";
 import { sequelize } from "../../../models/db";
@@ -26,7 +26,8 @@ describe("Middleware - Auth", () => {
         generateToken(req, res, next);
 
         // then
-        expect(res.userToken).toBeTruthy();
+        // expect(res.userToken).toBeTruthy();
+        expect(req.userToken).toBeTruthy();
     });
 
     test("JWT 소유여부를 확인하고 검증한다", async () => {
@@ -39,7 +40,7 @@ describe("Middleware - Auth", () => {
             const res = httpMocks.createResponse();
             const next = jest.fn();
             generateToken(req, res, next);
-            return res.userToken;
+            return req.userToken;
         }
         {
             // given : 올바른 토큰을 가지고 있는 요청
@@ -80,7 +81,7 @@ describe("Middleware - Auth", () => {
             checkToken(req, res, next);
 
             // then
-            expect(res.statusCode).toEqual(status.INTERNAL_SERVER_ERROR);
+            expect(res.statusCode).toEqual(status.UNAUTHORIZED);
         }
     });
 
