@@ -1,5 +1,5 @@
 import status from "http-status";
-import { user } from "../../models/db";
+import { user } from "../models/db";
 
 export async function checkExists(req, res, next) {
     const { userId } = req.query;
@@ -14,7 +14,7 @@ export async function checkExists(req, res, next) {
     }
 
     if (!result) {
-        res.status(status.FORBIDDEN).end();
+        return res.status(status.NO_CONTENT).end();
     }
 
     res.status(status.OK);

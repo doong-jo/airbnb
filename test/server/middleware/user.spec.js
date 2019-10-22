@@ -1,7 +1,7 @@
 import httpMocks from "node-mocks-http";
 import status from "http-status";
 import { sequelize } from "../../../models/db";
-import { checkExists, signup } from "../../../services/middleware/user";
+import { checkExists, signup } from "../../../middleware/user";
 
 describe("Middleware - User", () => {
     afterAll(async done => {
@@ -38,7 +38,7 @@ describe("Middleware - User", () => {
             await checkExists(req, res, next);
 
             // then
-            expect(res.statusCode).toEqual(status.FORBIDDEN);
+            expect(res.statusCode).toEqual(status.NO_CONTENT);
         }
     });
 
