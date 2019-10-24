@@ -56,7 +56,16 @@ function HouseItem(props) {
     return (
         <>
             <RowContainer>
-                <Slider settings={sliderSettings} />
+                <Slider
+                    settings={sliderSettings}
+                    imgs={[
+                        "http://placekitten.com/g/300/200",
+                        "http://placekitten.com/g/300/200",
+                        "http://placekitten.com/g/300/200",
+                        "http://placekitten.com/g/300/200",
+                        "http://placekitten.com/g/300/200"
+                    ]}
+                />
                 <ColContainer>
                     <HouseNameText content={name} />
                     <JoinCircleText
