@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
+import "rc-slider/assets/index.css";
 
 addParameters({
     options: {
