@@ -35,35 +35,19 @@ const SliderContainer = styled.div`
 `;
 
 function slider(props) {
+    function getImageItems() {
+        return props.imgs.map((img, i) => {
+            return (
+                <div>
+                    <img alt={i} src={img} />
+                </div>
+            );
+        });
+    }
     return (
         <>
             <SliderContainer>
-                <Slider {...props.settings}>
-                    <div>
-                        <img
-                            alt="slide1"
-                            src="http://placekitten.com/g/300/200"
-                        />
-                    </div>
-                    <div>
-                        <img
-                            alt="slide2"
-                            src="http://placekitten.com/g/300/200"
-                        />
-                    </div>
-                    <div>
-                        <img
-                            alt="slide3"
-                            src="http://placekitten.com/g/300/200"
-                        />
-                    </div>
-                    <div>
-                        <img
-                            alt="slide4"
-                            src="http://placekitten.com/g/300/200"
-                        />
-                    </div>
-                </Slider>
+                <Slider {...props.settings}>{getImageItems()}</Slider>
             </SliderContainer>
         </>
     );
