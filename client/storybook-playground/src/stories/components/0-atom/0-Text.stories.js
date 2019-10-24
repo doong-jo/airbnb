@@ -1,23 +1,48 @@
 import React from "react";
+import Page from "../page";
 import CountResultText from "./CountResultText";
 import JoinCircleText from "./JoinCircleText";
 import HouseNameText from "./HouseNameText";
 
+const path = "Atom/Text";
 export default {
-    title: "Components|Atom/Text"
+    title: `Components|${path}`
 };
 
-// CountResultText's dummy
-const resultNumber = 300;
-const prefixText = "숙소 ";
 export const countResultText = () => (
-    <CountResultText prefixText={prefixText} resultNumber={resultNumber} />
+    <Page
+        title={"CounterResultText"}
+        path={path}
+        property={`{
+                resultNumber: [number],
+                prefixText: [string]
+            }`}
+        content={<CountResultText prefixText={"숙소 "} resultNumber={300} />}
+    />
 );
 
-// JoinCircleText's dummy
-const texts = ["인원 3명", "침실 1개", "침대 1개", "욕실 1개"];
-export const joinCircleText = () => <JoinCircleText texts={texts} />;
+export const joinCircleText = () => (
+    <Page
+        title={"JoinCircleText"}
+        path={path}
+        property={`{
+                texts: [string]
+            }`}
+        content={
+            <JoinCircleText
+                texts={["인원 3명", "침실 1개", "침대 1개", "욕실 1개"]}
+            />
+        }
+    />
+);
 
 export const houseNameText = () => (
-    <HouseNameText content={"Hello HouseName!"} />
+    <Page
+        title={"HouseNameText"}
+        path={path}
+        property={`{
+            content: [string]
+        }`}
+        content={<HouseNameText content={"Hello HouseName!"} />}
+    />
 );

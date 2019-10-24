@@ -1,18 +1,12 @@
 import React from "react";
+import Page from "../page";
 import HouseItem from "./HouseItem";
 
+const path = "Organisms";
 export default {
-    title: "Components|Organisms"
+    title: `Components|${path}`
 };
 
-// HouseItem's dummy
-
-// Charming Victorian home - twin beds + breakfast
-//  https://a0.muscache.com/im/pictures/216165/7555968f_original.jpg?aki_policy=large
-// Private room
-// 2,1.0,1,2,
-// "{Internet,Wifi,""Air conditioning"",Kitchen,""Free parking on premises"",Breakfast,""Pets live on this property"",Cat(s),""Indoor fireplace"",Heating,Washer,Dryer,""Smoke detector"",""Carbon monoxide detector"",""First aid kit"",""Fire extinguisher"",Essentials,Shampoo,Hangers,""Hair dryer"",Iron,""translation missing: en.hosting_amenity_49"",""translation missing: en.hosting_amenity_50"",""Hot water"",""Bed linens"",""Extra pillows and blankets"",""Patio or balcony"",""Garden or backyard"",""Host greets you""}"
-//60,19,96
 const houseData = {
     name: "Charming Victorian home - twin beds + breakfast",
     image:
@@ -33,4 +27,13 @@ const houseData = {
     reviewCount: 19
 };
 
-export const houseItem = () => <HouseItem data={houseData} />;
+export const houseItem = () => (
+    <Page
+        title={"RatingStar"}
+        path={path}
+        property={`{
+            data: [object]
+        }`}
+        content={<HouseItem data={houseData} />}
+    />
+);
