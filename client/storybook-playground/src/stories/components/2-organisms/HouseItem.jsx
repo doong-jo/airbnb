@@ -50,22 +50,14 @@ function HouseItem(props) {
         bathroom,
         desc,
         rating,
-        reviewCount
+        reviewCount,
+        imgs
     } = props.data;
 
     return (
         <>
             <RowContainer>
-                <Slider
-                    settings={sliderSettings}
-                    imgs={[
-                        "http://placekitten.com/g/300/200",
-                        "http://placekitten.com/g/300/200",
-                        "http://placekitten.com/g/300/200",
-                        "http://placekitten.com/g/300/200",
-                        "http://placekitten.com/g/300/200"
-                    ]}
-                />
+                <Slider settings={sliderSettings} imgs={imgs} />
                 <ColContainer>
                     <HouseNameText content={name} />
                     <JoinCircleText
