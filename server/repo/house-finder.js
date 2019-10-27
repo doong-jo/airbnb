@@ -18,17 +18,18 @@ const defaultOptions = {
 // 모든 필터의 검색 조건을 합친다.
 function mergeFilters(filters, options) {
     const filterData = Object.entries(filters);
-    const mergedFilter = filterData.reduce((acc, filter) => {
+    const mergeReducer = (acc, filter) => {
         let [name, value] = filter;
         if (!value.length) {
             value = [value];
         }
-        acc = deepmerge(acc, houseFilter[name](...value));
-        return acc;
-    }, {});
-
+        return deepmerge(acc, houseFilter[name](...value));
+    };
+    const mergedFilter = filterData.reduce(mergeReducer, {});
     const mergedOptions = Object.assign(mergedFilter, options);
+
     mergedOptions.where = { [and]: mergedOptions.where };
+
     return mergedOptions;
 }
 
