@@ -37,6 +37,8 @@ function RelativeModal(props) {
         border-radius: 0.25rem;
         padding: 1.5rem;
         margin-top: 1rem;
+        z-index: 1050;
+        background: #fff;
     `;
     return (
         <>
