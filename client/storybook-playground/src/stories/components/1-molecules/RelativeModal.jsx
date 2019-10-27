@@ -16,7 +16,7 @@ const FilterModalFooter = styled.div`
 `;
 
 function RelativeModal(props) {
-    const { toggle, content, cancleText, confirmText } = props;
+    const { toggle, content, cancelText, confirmText } = props;
     const FilterModalBackdrop = styled.div`
         display: ${!props.isOpen ? "none" : "block"};
         position: fixed;
@@ -46,7 +46,7 @@ function RelativeModal(props) {
                 <FilterModalFooter>
                     <FilterModalButton
                         type={"cancel"}
-                        content={cancleText}
+                        content={cancelText}
                         onClick={toggle}
                     />
                     <FilterModalButton
@@ -63,7 +63,7 @@ function RelativeModal(props) {
 RelativeModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     content: PropTypes.object,
-    cancleText: PropTypes.string,
+    cancelText: PropTypes.string,
     confirmText: PropTypes.string,
     toggle: PropTypes.func.isRequired
 };

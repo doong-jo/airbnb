@@ -1,5 +1,3 @@
-
-
 const buttonWithModal = () => {
     const [firstModaIOpen, firstOpenModal] = useState(false);
     const firstToggle = () => {
@@ -29,7 +27,7 @@ const buttonWithModal = () => {
                                     Content1Content1Content1Content1Content1Content1Content1Content1Content1
                                 </>
                             }
-                            cancleText={"Cancle"}
+                            cancelText={"Cancle"}
                             confirmText={"Confirm"}
                         />
                     </span>
@@ -49,7 +47,7 @@ const buttonWithModal = () => {
                                     Content2Content2Content2Content2Content2Content2Content2Content2Content2
                                 </>
                             }
-                            cancleText={"Cancle"}
+                            cancelText={"Cancle"}
                             confirmText={"Confirm"}
                         />
                     </span>
