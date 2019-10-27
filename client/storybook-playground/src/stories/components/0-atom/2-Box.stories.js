@@ -1,21 +1,14 @@
 import React from "react";
-import Page from "../page";
-import { action } from "@storybook/addon-actions";
+import { text, number } from "@storybook/addon-knobs";
 import CurrencyBox from "./CurrencyBox";
 
-const path = "Atom/Box";
 export default {
-    title: `Components|${path}`
+    title: "Components|Atom/Box"
 };
 
 export const currencyBox = () => (
-    <Page
-        title={"CurrencyBox"}
-        path={path}
-        property={`{
-            currencyType: [string],
-            amount: [number]
-        }`}
-        content={<CurrencyBox currencyType={"$"} amount={100} />}
+    <CurrencyBox
+        currencyType={text("currencyType", "$")}
+        amount={number("amount", 100)}
     />
 );

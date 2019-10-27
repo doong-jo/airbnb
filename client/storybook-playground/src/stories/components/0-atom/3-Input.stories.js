@@ -1,21 +1,8 @@
 import React from "react";
-import Page from "../page";
-import { action } from "@storybook/addon-actions";
-import CheckBox from "./CheckBox";
+import CustomCheckBox from "./CheckBox";
 
-const path = "Atom/Input";
 export default {
-    title: `Components|${path}`
+    title: "Components|Atom/Input"
 };
 
-export const currencyBox = () => (
-    <Page
-        title={"CurrencyBox"}
-        path={path}
-        property={`{
-            currencyType: [string],
-            amount: [number]
-        }`}
-        content={<CheckBox />}
-    />
-);
+export const checkBox = () => <CustomCheckBox />;

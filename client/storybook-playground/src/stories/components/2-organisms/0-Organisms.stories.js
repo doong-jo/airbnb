@@ -1,16 +1,17 @@
 import React from "react";
-import Page from "../page";
+import { object } from "@storybook/addon-knobs";
 import HouseItem from "./HouseItem";
 
-const path = "Organisms";
 export default {
-    title: `Components|${path}`
+    title: "Components|Organisms"
 };
 
 const houseData = {
     name: "Charming Victorian home - twin beds + breakfast",
-    image:
-        "https://a0.muscache.com/im/pictures/216165/7555968f_original.jpg?aki_policy=large",
+    imgs: [
+        "http://placekitten.com/g/300/200",
+        "http://placekitten.com/g/300/200"
+    ],
     capacity: "3",
     bed: "2",
     bedroom: "1",
@@ -27,13 +28,4 @@ const houseData = {
     reviewCount: 19
 };
 
-export const houseItem = () => (
-    <Page
-        title={"RatingStar"}
-        path={path}
-        property={`{
-            data: [object]
-        }`}
-        content={<HouseItem data={houseData} />}
-    />
-);
+export const houseItem = () => <HouseItem data={object("data", houseData)} />;
