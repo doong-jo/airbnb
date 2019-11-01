@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { text, number, object, array } from "@storybook/addon-knobs";
 import { Button } from "reactstrap";
+import { action } from "@storybook/addon-actions";
 import SelectFilter from "./SelectFilter";
 import Slider from "./Slider";
 import RatingStar from "./RatingStar";
@@ -10,6 +11,7 @@ import RangeBar from "./RangeBar";
 import PriceRange from "./PriceRange";
 import RelativeModal from "./RelativeModal";
 import CheckContent from "./CheckContent";
+import DynamicDataBox from "./DynamicDataBox";
 
 export default {
     title: "Components|Molecules"
@@ -90,5 +92,48 @@ export const RelativeModal_ = () => {
 };
 
 export const checkContent = () => {
-    return <CheckContent />;
+    return (
+        <CheckContent
+            data={object("data", [
+                {
+                    onChange: action("check"),
+                    title: "집 전체",
+                    content: "집 전체를 단독으로 사용합니다."
+                },
+                {
+                    onChange: action("check"),
+                    title: "개인실",
+                    content:
+                        "침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께 이용할 수도 있습니다."
+                }
+            ])}
+        />
+    );
+};
+
+export const dynamicDataBoxOfDate = () => {
+    return (
+        <>
+            <DynamicDataBox
+                title={"날짜"}
+                type={"date"}
+                data={{ start: "2020/01/04", end: "2020/01/21" }}
+            />
+        </>
+    );
+};
+
+export const dynamicDataBoxOfPeople = () => {
+    return (
+        <>
+            <DynamicDataBox
+                title={"인원"}
+                type={"people"}
+                data={[
+                    { name: "게스트", number: 1 },
+                    { name: "유아", number: 1 }
+                ]}
+            />
+        </>
+    );
 };
