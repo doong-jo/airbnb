@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { text } from "@storybook/addon-knobs";
+import { text, boolean } from "@storybook/addon-knobs";
 import ToggleButton from "./ToggleButton";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
@@ -14,6 +14,7 @@ export default {
 
 export const toggle = () => (
     <ToggleButton
+        isEnabled={boolean("isEnabled", false)}
         onClick={action("Clicked toggle")}
         content={text("content", "Hello ToggleButton!")}
     />

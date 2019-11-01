@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
@@ -44,18 +44,14 @@ const Button = styled.button`
     }
 `;
 function ToggleButton(props) {
-    const [isEnabled, setEnable] = useState(false);
+    const { isEnabled } = props;
 
     return (
         <>
             <Button
                 isEnabled={isEnabled}
                 onClick={() => {
-                    if (props.onClick) {
-                        props.onClick();
-                    }
-
-                    setEnable(!isEnabled);
+                    props.onClick();
                 }}
             >
                 {props.content}
@@ -66,7 +62,8 @@ function ToggleButton(props) {
 
 ToggleButton.propTypes = {
     content: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    isEnabled: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired
 };
 
 export default ToggleButton;
