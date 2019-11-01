@@ -8,9 +8,7 @@ function InfoButton(props) {
             <Button
                 color="info"
                 onClick={() => {
-                    if (props.onClick) {
-                        props.onClick();
-                    }
+                    props.onClick();
                 }}
             >
                 {props.content}
@@ -21,7 +19,7 @@ function InfoButton(props) {
 
 InfoButton.propTypes = {
     content: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 };
 
 export default InfoButton;

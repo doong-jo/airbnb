@@ -37,9 +37,7 @@ function SecondaryButton(props) {
                 <Button
                     color="secondary"
                     onClick={() => {
-                        if (props.onClick) {
-                            props.onClick();
-                        }
+                        props.onClick();
                     }}
                 >
                     {props.content}
@@ -51,7 +49,7 @@ function SecondaryButton(props) {
 
 SecondaryButton.propTypes = {
     content: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 };
 
 export default SecondaryButton;

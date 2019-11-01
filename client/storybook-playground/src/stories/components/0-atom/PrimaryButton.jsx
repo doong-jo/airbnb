@@ -36,9 +36,7 @@ function PrimaryButton(props) {
                 <Button
                     color="primary"
                     onClick={() => {
-                        if (props.onClick) {
-                            props.onClick();
-                        }
+                        props.onClick();
                     }}
                 >
                     {props.content}
@@ -50,7 +48,7 @@ function PrimaryButton(props) {
 
 PrimaryButton.propTypes = {
     content: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 };
 
 export default PrimaryButton;

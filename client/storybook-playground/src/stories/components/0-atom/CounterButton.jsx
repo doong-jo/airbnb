@@ -33,9 +33,7 @@ function CounterButton(props) {
         <>
             <Container
                 onClick={() => {
-                    if (props.onClick) {
-                        props.onClick();
-                    }
+                    props.onClick();
                 }}
             >
                 <Span>{props.content}</Span>
@@ -46,7 +44,7 @@ function CounterButton(props) {
 
 CounterButton.propTypes = {
     content: PropTypes.string.isRequired,
-    onClick: PropTypes.func
+    onClick: PropTypes.func.isRequired
 };
 
 export default CounterButton;
