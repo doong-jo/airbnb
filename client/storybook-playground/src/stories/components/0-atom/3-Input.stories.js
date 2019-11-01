@@ -22,3 +22,18 @@ export const checkBox = () => {
         />
     );
 };
+
+export const toggleSwitch = () => {
+    function onChange(e) {
+        action("checked")(e);
+    }
+
+    return (
+        <ToggleSwitch
+            isChecked={boolean("checked", false)}
+            onChange={e => {
+                onChange(e);
+            }}
+        />
+    );
+};
