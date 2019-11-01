@@ -38,9 +38,9 @@ function slider(props) {
     function getImageItems() {
         return props.imgs.map((img, i) => {
             return (
-                <>
+                <div key={i}>
                     <img key={i} alt={i} src={img} />
-                </>
+                </div>
             );
         });
     }
