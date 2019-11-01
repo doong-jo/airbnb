@@ -15,18 +15,6 @@ export const countResultText = () => (
         resultNumber={number("resultNumber", 300)}
     />
 );
-storiesOf("Components|Atom/Text" , module).add(
-    "with some emoji",
-    () => (
-        <CountResultText
-            prefixText={text("prefixText", "숙소 ")}
-            resultNumber={number("resultNumber", 300)}
-        />
-    ),
-    {
-        notes: "A very simple example of addon notes"
-    }
-);
 
 export const joinCircleText = () => (
     <JoinCircleText
