@@ -1,9 +1,9 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
 import { text, number, array } from "@storybook/addon-knobs";
 import CountResultText from "./CountResultText";
 import JoinCircleText from "./JoinCircleText";
 import HouseNameText from "./HouseNameText";
+import LinkText from "./LinkText";
 
 export default {
     title: "Components|Atom/Text"
@@ -24,4 +24,11 @@ export const joinCircleText = () => (
 
 export const houseNameText = () => (
     <HouseNameText content={text("content", "Hello HouseName!")} />
+);
+
+export const linkText = () => (
+    <LinkText
+        href={text("href", "https://www.airbnb.co.kr/")}
+        description={text("description", "더 알아보기")}
+    />
 );
