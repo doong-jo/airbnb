@@ -16,9 +16,9 @@ const FilterModalFooter = styled.div`
 `;
 
 function RelativeModal(props) {
-    const { toggle, content, cancelText, confirmText } = props;
+    const { toggle, content, cancelText, confirmText, isOpen, width } = props;
     const FilterModalBackdrop = styled.div`
-        display: ${!props.isOpen ? "none" : "block"};
+        display: ${!isOpen ? "none" : "block"};
         position: fixed;
         width: 100%;
         height: 100%;
@@ -30,9 +30,9 @@ function RelativeModal(props) {
         opacity: 0.5;
     `;
     const FilterModal = styled.div`
-        display: ${!props.isOpen ? "none" : "block"};
+        display: ${!isOpen ? "none" : "block"};
         position: absolute;
-        width: ${props.width};
+        width: ${width};
         border: 1px solid #ccc;
         border-radius: 0.25rem;
         padding: 1.5rem;
@@ -64,6 +64,7 @@ function RelativeModal(props) {
 
 RelativeModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    width: PropTypes.string,
     content: PropTypes.object,
     cancelText: PropTypes.string,
     confirmText: PropTypes.string,
