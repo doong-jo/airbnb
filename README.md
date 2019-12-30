@@ -12,6 +12,8 @@
   </a>
 </p>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3b601b2c-afa6-4a1a-b72d-8b04f04495b9/deploy-status)](https://app.netlify.com/sites/doong-airbnb-storybook/deploys)
+
 ## 📺 [Demo](https://doong-airbnb-storybook.netlify.com/)
 
 ## Author
